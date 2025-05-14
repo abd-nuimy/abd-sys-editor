@@ -28,7 +28,6 @@ header {
   box-shadow: 4px 2px 20px #2c3e5020;
   color: #2980b9;
   padding: 15px;
-  font-size: 1.8em;
   font-weight: bolder;
   direction: rtl; /* التأكد من المحاذاة لليمين (إذا كنت تستخدم نصًا عربيًا) */
   
@@ -42,20 +41,12 @@ header img {
   width: 65px;
   margin-right: 60px; /* إضافة مسافة بين الصورة والحافة اليمنى */
 }
-
-header .text-container {
-  margin-right: -50px;
-  display: flex;
-  flex-direction: column; /* ترتيب النص والرابط عموديًا */
-  align-items: flex-start; /* محاذاة النص والرابط إلى اليسار */
+header span{
+  margin-right: -60px;
+  margin-top: 15px;
+  font-size:22px;
 }
 
-header a {
-  text-decoration: none;
-  font-size: 14px;
-  color: rgb(0, 0, 0);
-  margin-top: 5px; /* المسافة بين العنوان والرابط */
-}
 
 
 
@@ -331,11 +322,9 @@ body.dark-mode {
 
 <header>
   <img src="images/logo-home.png" alt="">
-    <div class="text-container">
 
   <span>محرر الملفات الذكي</span>
-  <a href="index.html" target="_blank">الرئيسية</a>
-    </div>
+
   <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
     <i class="fa-solid fa-moon"></i>
   </button>
