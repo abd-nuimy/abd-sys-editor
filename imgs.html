@@ -545,7 +545,25 @@ h2{
   text-align: center;
   font-weight: bolder;
 }
+#scrollBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  color:darkred;
+  background: none;
+  border: none;
 
+  font-size: 25px;
+  cursor: pointer;
+  display: none; /* مخفي بالبداية */
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease;
+}
+
+#scrollBtn:hover {
+  background:none;
+}
   </style>
 </head>
 <body>
@@ -559,6 +577,7 @@ h2{
     <i class="fa-solid fa-moon"></i>
   </button>
 </header>
+<button onclick="scrollToTop()" id="scrollBtn" title="العودة للأعلى"><i class="fa-solid fa-chevron-up"></i></button>
 
 <h2>خدمات الصور</h2>
 
