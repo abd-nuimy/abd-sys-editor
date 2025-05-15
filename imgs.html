@@ -763,6 +763,22 @@ h2{
     reader.readAsArrayBuffer(file);
   }
 </script>
+<script>
+  const scrollBtn = document.getElementById("scrollBtn");
 
+  // إظهار الزر عند التمرير لأسفل 100px
+  window.onscroll = function() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  };
+
+  // وظيفة الصعود لأعلى
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 </body>
 </html>
