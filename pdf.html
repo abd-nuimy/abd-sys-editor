@@ -576,8 +576,15 @@ h2{
   background:none;
 }
 .card .extractTextFromPDF{
-  height: 30px;
+  height: 15px;
   background-color: #8c00ff15;
+}
+.card .copy{
+  background: none;
+  color: #1a1a1a;
+  border: none;
+  margin-top: -40px;
+  margin-right: -260px;
 }
   </style>
 </head>
@@ -669,8 +676,21 @@ h2{
       <label for="extractTextPdf">اختر ملف</label>
       <button onclick="extractTextFromPDF()">استخراج</button>
     </div>
-  <textarea class="extractTextFromPDF id="pdfTextOutput" placeholder="سيظهر النص هنا بعد الاستخراج..."></textarea>
+<textarea class="extractTextFromPDF" id="pdfTextOutput" placeholder="سيظهر النص هنا بعد الاستخراج." rows="6"></textarea>
+<button class="copy" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
   </div>
+
+<script>
+  function copyText() {
+    const textarea = document.getElementById('pdfTextOutput');
+    textarea.select();               // يحدد كل النص في الـ textarea
+    textarea.setSelectionRange(0, 99999); // لتوافق الموبايل
+    navigator.clipboard.writeText(textarea.value)
+      .then(() => alert('تم نسخ النص!'))
+      .catch(() => alert('حدث خطأ أثناء النسخ'));
+  }
+</script>
+
 </div>
 <!-- أداة: استخراج صور من PDF -->
 <div class="card">
