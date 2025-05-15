@@ -319,35 +319,7 @@ body.dark-mode {
 
 
 
-/* تصميم الأدوات داخل الحاوية */
-.tool {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.tool:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-/* العناوين داخل الأدوات */
-.tool h3 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #2980b9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.tool h3 i {
-  margin-left: 10px;
-  font-size: 1.3em;
-}
 
 /* إدخال النصوص والمربعات المنسدلة */
 .card input[type="file"],
@@ -358,17 +330,10 @@ body.dark-mode {
   padding: 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  background-color: #f9f9f9;
   font-size: 1em;
   transition: border 0.3s ease;
 }
-.card textarea{
-  height: 8px;
-}
- body.dark-mode .card textarea{
-  background-color: #1a1a1a;
-  color: white;
-}
+
 
 .card select {
   width: 100%;
@@ -392,7 +357,6 @@ body.dark-mode select {
 }
 
 .card input[type="file"]:hover,
-.card textarea:hover,
 .card select:hover {
   border-color: #3498db;
 }
@@ -575,16 +539,27 @@ h2{
 #scrollBtn:hover {
   background:none;
 }
-.card .extractTextFromPDF{
-  height: 15px;
-  background-color: #8c00ff15;
+.card textarea{
+  height: 35px;
+  background-color: #f7003e0f;
+  font: bolder;
+  padding: 0;
+}
+ body.dark-mode .card textarea{
+  background-color: #000000;
+  color: white;
 }
 .card .copy{
   background: none;
   color: #1a1a1a;
   border: none;
   margin-top: -40px;
-  margin-right: -260px;
+  margin-right: 260px;
+}
+.card .copy:hover{
+  background: none;
+  color: #830202;
+
 }
   </style>
 </head>
@@ -669,7 +644,7 @@ h2{
 <div class="card">
   <div class="card-icon"><i class="fa-brands fa-searchengin"></i></div>
   <div class="card-title">استخراج النص من PDF</div>
-  <div class="card-desc">اختر ملف PDF وسيتم استخراج النص الموجود داخله وعرضه أدناه.</div>
+  <div class="card-desc">استخراج النص الموجود داخل الملف</div>
   <div class="file-upload-container">
     <input type="file" id="extractTextPdf" accept="application/pdf" />
     <div class="button-row">
@@ -679,6 +654,7 @@ h2{
 <textarea class="extractTextFromPDF" id="pdfTextOutput" placeholder="سيظهر النص هنا بعد الاستخراج." rows="6"></textarea>
 <button class="copy" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
   </div>
+  </div>
 
 <script>
   function copyText() {
@@ -686,12 +662,10 @@ h2{
     textarea.select();               // يحدد كل النص في الـ textarea
     textarea.setSelectionRange(0, 99999); // لتوافق الموبايل
     navigator.clipboard.writeText(textarea.value)
-      .then(() => alert('تم نسخ النص!'))
-      .catch(() => alert('حدث خطأ أثناء النسخ'));
+
   }
 </script>
 
-</div>
 <!-- أداة: استخراج صور من PDF -->
 <div class="card">
   <div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div>
