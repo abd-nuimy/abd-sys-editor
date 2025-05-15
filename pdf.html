@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>محرر الملفات الذكي</title>
+  <title>محرر الملفات الذكي - خدمات PDF</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
@@ -363,7 +363,11 @@ body.dark-mode {
   transition: border 0.3s ease;
 }
 .card textarea{
-  height: 1px;
+  height: 8px;
+}
+ body.dark-mode .card textarea{
+  background-color: #1a1a1a;
+  color: white;
 }
 
 .card select {
@@ -684,7 +688,6 @@ h2{
 </div>
 
 
-  </script>
 
 
   <div class="footer">
@@ -720,7 +723,32 @@ h2{
 
 
 
+<script>
+    const toggleButton = document.getElementById("themeToggle");
+    const body = document.body;
 
+    // حفظ الوضع في localStorage
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "dark") {
+      body.classList.add("dark-mode");
+      toggleButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    } else {
+      body.classList.add("light-mode");
+      toggleButton.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    }
+
+    toggleButton.addEventListener("click", () => {
+      if (body.classList.contains("dark-mode")) {
+        body.classList.replace("dark-mode", "light-mode");
+        toggleButton.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        localStorage.setItem("theme", "light");
+      } else {
+        body.classList.replace("light-mode", "dark-mode");
+        toggleButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        localStorage.setItem("theme", "dark");
+      }
+    });
+  </script>
   <script>
     async function extractImages() {
       const fileInput = document.getElementById('pdfFile');
