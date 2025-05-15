@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>محرر الملفات الذكي</title>
     <link rel="icon" href="images/no-background (6).png">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=picture_as_pdf" />
   <!-- مكتبات PDF -->
@@ -225,7 +224,7 @@ header span{
       color: white;
       text-align: center;
       padding: 10px 0;
-      margin-top: -150px;
+      margin-top:-150px;
       
     }
     footer .send{
@@ -246,6 +245,10 @@ footer img {
             width: 100%;
 
     }
+
+
+
+
     footer a{
       color: rgb(255, 255, 255);
       text-decoration: none;
@@ -310,6 +313,7 @@ body.dark-mode {
     font-size: 24px;
     font-weight: bolder;
   }
+
 }
 /*الرئيسييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييييي*/
 
@@ -613,42 +617,8 @@ h2{
     </div>
     </div>
   </div>
-
-  <!-- صورة إلى PDF -->
-  <div class="card">
-    <div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div>
-    <div class="card-title">تحويل صورة إلى PDF</div>
-    <div class="card-desc">صورة الى ملف PDF.</div>
-    <select id="pageSize" >
-      <option value="a">انقر لإختيار حجم الورقة</option>
-      <option value="a4">A4</option>
-      <option value="a5">A5</option>
-      <option value="letter">Letter</option>
-    </select>
-    <div class="file-upload-container">
-      <input type="file" accept="image/*" id="imgToPdfInput" />
-        <div class="button-row">
-
-      <label for="imgToPdfInput">اختر صورة</label>
-      <button onclick="imageToPDF()">تحويل وتحميل</button>
-    </div>
-    </div>
   </div>
 
-  <!-- صور متعددة إلى PDF -->
-  <div class="card">
-    <div class="card-icon"><i class="fa-solid fa-images"></i></div>
-    <div class="card-title">صور متعددة إلى PDF</div>
-    <div class="card-desc">يمكنك بسهولة اختيار عدة صور لتحويلها إلى ملف PDF         بالضغط على تحويل جميع الصور سيتم تحميل الملف على جهازك.</div>
-    <div class="file-upload-container">
-      <input type="file" accept="image/*" id="multiImgInput" multiple />
-        <div class="button-row">
-
-      <label for="multiImgInput">اختر صور</label>
-      <button onclick="multiImageToPDF()">تحويل الصور</button>
-    </div>
-    </div>
-  </div>
 
   <div class="footer">
     <div class="programmer">
@@ -760,67 +730,7 @@ h2{
     reader.readAsDataURL(file);
   }
 
-  function imageToPDF() {
-    const file = document.getElementById("imgToPdfInput").files[0];
-    const pageSize = document.getElementById("pageSize").value;
-    if (!file) return alert("اختر صورة أولاً");
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF({ format: pageSize, unit: 'mm' });
-      const img = new Image();
-      img.src = e.target.result;
-      img.onload = function() {
-        const pw = pdf.internal.pageSize.getWidth();
-        const ph = pdf.internal.pageSize.getHeight();
-        const imgRatio = img.width / img.height;
-        let iw = pw - 20, ih = iw / imgRatio;
-        if (ih > ph - 20) { ih = ph - 20; iw = ih * imgRatio; }
-        const x = (pw - iw) / 2, y = (ph - ih) / 2;
-        pdf.addImage(img, 'JPEG', x, y, iw, ih);
-        pdf.save("image.pdf");
-      };
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function multiImageToPDF() {
-    const files = document.getElementById("multiImgInput").files;
-    if (!files.length) return alert("اختر صورًا");
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF();
-    let index = 0;
-
-    function addNext() {
-      if (index >= files.length) {
-        pdf.save("multi-image.pdf");
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = function() {
-          const pw = pdf.internal.pageSize.getWidth();
-          const ph = pdf.internal.pageSize.getHeight();
-          const imgRatio = img.width / img.height;
-          let iw = pw - 20, ih = iw / imgRatio;
-          if (ih > ph - 20) { ih = ph - 20; iw = ih * imgRatio; }
-          const x = (pw - iw) / 2, y = (ph - ih) / 2;
-          pdf.addImage(img, 'JPEG', x, y, iw, ih);
-          if (index < files.length - 1) pdf.addPage();
-          index++;
-          addNext();
-        };
-      };
-      reader.readAsDataURL(files[index]);
-    }
-
-    addNext();
-  }
 
   function textToPDF() {
     const text = document.getElementById("textToPdfInput").value.trim();
