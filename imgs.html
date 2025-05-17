@@ -697,8 +697,8 @@ h2{
 
   <div class="file-upload-container">
     <!-- Inputs -->
-    <input type="file" accept="image/*" capture="environment" id="bgRemoveInput1" style="display:none" onchange="startProgress('bg')" />
-    <input type="file" accept="image/*" id="bgRemoveInput" style="display:none" onchange="startProgress('bg')" />
+    <input type="file" accept="image/*" capture="environment" id="bgRemoveInput1" style="display:none" onchange="handleImageSelect('bg')" />
+    <input type="file" accept="image/*" id="bgRemoveInput" style="display:none" onchange="handleImageSelect('bg')" />
 
     <div class="button-row">
       <label class="Download-button" id="chooseLabel">
@@ -738,10 +738,10 @@ h2{
     <!-- Inputs -->
 
 <!-- مدخل الكاميرا -->
-<input type="file" accept="image/*" capture="environment" id="compressInput2a" style="display:none" onchange="handleImageSelect('compress')">
+<input type="file" accept="image/*" capture="environment" id="compressInput2a" style="display:none" onchange="handleImageSelect2('compress')">
 
 <!-- مدخل الألبوم -->
-<input type="file" accept="image/*" id="compressInput2" style="display:none" onchange="handleImageSelect('compress')">
+<input type="file" accept="image/*" id="compressInput2" style="display:none" onchange="handleImageSelect2('compress')">
     <div class="button-row">
       <label class="Download-button" id="chooseLabel2">
         اختيار صورة
@@ -769,14 +769,17 @@ h2{
   <div id="progressTextCompress" style="text-align: center; margin-top: 2px; font-size: 14px; display: none;">0%</div>
 </div>
 <script>
-function handleImageSelect(section) {
+function handleImageSelect2(section) {
   if (section === 'compress') {
     document.getElementById('choiceButtons2').style.display = "none";
     startProgress('compress');
-  } else if (section === 'bg') {
+}
+}
+function handleImageSelect(section) {
+  if (section === 'bg') {
     document.getElementById('choiceButtons').style.display = "none";
     startProgress('bg');
-  }
+}
 }
 
 
