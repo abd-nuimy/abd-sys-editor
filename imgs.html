@@ -655,7 +655,7 @@ h2{
 
   .choice-buttons button {
     padding: 5px 10px;
-    background-color: #f0f0f0;
+    background-color: #6a00ff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -697,66 +697,139 @@ h2{
 
   <div class="file-upload-container">
     <!-- Inputs -->
-    <input type="file" accept="image/*" capture="environment" id="bgRemoveInput1" style="display:none" />
-    <input type="file" onchange="startProgress()" accept="image/*" id="bgRemoveInput" style="display:none" />
+    <input type="file" accept="image/*" capture="environment" id="bgRemoveInput1" style="display:none" onchange="startProgress('bg')" />
+    <input type="file" accept="image/*" id="bgRemoveInput" style="display:none" onchange="startProgress('bg')" />
 
     <div class="button-row">
-      <!-- Label -->
       <label class="Download-button" id="chooseLabel">
         اختيار صورة
         <i class="fa-regular fa-object-group"></i>
       </label>
 
-      <!-- تظهر تحت "اختر صورة" مباشرة -->
       <div class="choice-buttons" id="choiceButtons">
-        <button onclick="openCamera()" id="cameraBtn" >كاميرا</button>
-        <button id="galleryBtn">البوم</button>
+        <button onclick="document.getElementById('bgRemoveInput1').click()">كاميرا</button>
+        <button onclick="document.getElementById('bgRemoveInput').click()">البوم</button>
       </div>
 
-    <!-- زر التحميل -->
-    <button class="Download-button" onclick="removeBgLocal()">
-      <span>تحميل</span>
-      <i class="fa-solid fa-download"></i>
-    </button>
-  </div>
-      </div>
-
-
-
-    <!-- مكتبات TensorFlow و BodyPix -->
-
-
-
-    <!-- شريط التقدم -->
-    <div class="progressContainer" id="progressContainer" style="height: 5px; border-radius: 200px; background: #ccc; margin-top: 10px; width: 100%; display: none;">
-      <div id="progressBar" style="height: 100%; width: 0%; border-radius: 200px; background: #00cc22;"></div>
+      <button class="Download-button" onclick="removeBgLocal()">
+        <span>تحميل</span>
+        <i class="fa-solid fa-download"></i>
+      </button>
     </div>
+  </div>
 
-    <!-- ✅ العداد النصي -->
-    <div id="progressText" style="text-align: center;  margin-top: 2px; font-size: 14px; display: none;">0%</div>
+  <!-- شريط التقدم لقسم إزالة الخلفية -->
+  <div class="progressContainer" id="progressContainerBg" style="height: 5px; border-radius: 200px; background: #ccc; margin-top: 10px; width: 100%; display: none;">
+    <div id="progressBarBg" style="height: 100%; width: 0%; border-radius: 200px; background: #00cc22;"></div>
+  </div>
+
+  <div id="progressTextBg" style="text-align: center; margin-top: 2px; font-size: 14px; display: none;">0%</div>
 </div>
 
-
-
-
-
-  <!-- ضغط الصور -->
-  <div class="card">
-    <div class="card-icon"><i class="fa-solid fa-compress"></i></div>
-    <div class="card-title">ضغط الصور</div>
-    <div class="card-desc">يمكنك بسهولة اختيار صورة لتقليص او تصغير حجمها دون فقدان الجودة الاصلية وستيم تحميل الصورة مباشرة على جهازك .</div>
-    <div class="file-upload-container">
-      <input type="file" accept="image/*"  id="compressInput" />
-      <input type="file" id="compressInput1" capture="environment" />
-        <div class="button-row">
-
-      <label for="compressInput">اختر صورة</label>
-      <button onclick="compressImage()">ضغط وتحميل</button>
-    </div>
-    </div>
-  </div>
+<!-- ضغط الصور -->
+<div class="card">
+  <div class="card-icon"><i class="fa-solid fa-compress"></i></div>
+  <div class="card-title">ضغط الصور</div>
+  <div class="card-desc">
+    يمكنك بسهولة اختيار صورة لتقليص أو تصغير حجمها دون فقدان الجودة الأصلية، وسيتم تحميل الصورة مباشرة على جهازك.
   </div>
 
+  <div class="file-upload-container">
+    <!-- Inputs -->
+
+<!-- مدخل الكاميرا -->
+<input type="file" accept="image/*" capture="environment" id="compressInput2a" style="display:none" onchange="handleImageSelect('compress')">
+
+<!-- مدخل الألبوم -->
+<input type="file" accept="image/*" id="compressInput2" style="display:none" onchange="handleImageSelect('compress')">
+    <div class="button-row">
+      <label class="Download-button" id="chooseLabel2">
+        اختيار صورة
+        <i class="fa-regular fa-object-group"></i>
+      </label>
+
+<!-- أزرار الكاميرا والألبوم -->
+<div class="choice-buttons" id="choiceButtons2">
+  <button onclick="document.getElementById('compressInput2a').click()">كاميرا</button>
+  <button onclick="document.getElementById('compressInput2').click()">البوم</button>
+</div>
+
+      <button class="Download-button" onclick="compressImage()">
+        <span>تحميل</span>
+        <i class="fa-solid fa-download"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- شريط التقدم لقسم ضغط الصور -->
+  <div class="progressContainer" id="progressContainerCompress" style="height: 5px; border-radius: 200px; background: #ccc; margin-top: 10px; width: 100%; display: none;">
+    <div id="progressBarCompress" style="height: 100%; width: 0%; border-radius: 200px; background: #00cc22;"></div>
+  </div>
+
+  <div id="progressTextCompress" style="text-align: center; margin-top: 2px; font-size: 14px; display: none;">0%</div>
+</div>
+<script>
+  function handleImageSelect(section) {
+    // إخفاء أزرار الاختيار
+    if (section === 'compress') {
+      document.getElementById('choiceButtons2').style.display = "none";
+      startProgress('compress');
+    } else if (section === 'bg') {
+      document.getElementById('choiceButtons1').style.display = "none";
+      startProgress('bg');
+    }
+  }
+
+
+
+      function removeBgLocal() {
+      document.getElementById('progressContainerBg').style.display = "none";
+      document.getElementById('progressTextBg').style.display = "none";
+      alert("تم تحميل الصورة بدون خلفية");
+    }
+
+    function compressImage() {
+      // إخفاء الشريط عند الضغط على تحميل
+      document.getElementById('progressContainerCompress').style.display = "none";
+      document.getElementById('progressTextCompress').style.display = "none";
+    }
+</script>
+
+<script>
+     function startProgress(section) {
+      const duration = 4000; // المدة الكاملة (3 ثواني)
+      const steps = 60;
+      const stepTime = duration / steps;
+
+      let progress = 0;
+      let barId = section === 'bg' ? 'progressBarBg' : 'progressBarCompress';
+      let textId = section === 'bg' ? 'progressTextBg' : 'progressTextCompress';
+      let containerId = section === 'bg' ? 'progressContainerBg' : 'progressContainerCompress';
+
+      const bar = document.getElementById(barId);
+      const text = document.getElementById(textId);
+      const container = document.getElementById(containerId);
+
+      bar.style.width = "0%";
+      text.innerText = "0%";
+      container.style.display = "block";
+      text.style.display = "block";
+
+      const interval = setInterval(() => {
+        progress++;
+        const percent = Math.round((progress / steps) * 100);
+        bar.style.width = percent + "%";
+        text.innerText = percent + "%";
+
+        if (progress >= steps) {
+          clearInterval(interval);
+        }
+      }, stepTime);
+    }
+</script>
+
+
+  </div>
 
   <div class="footer">
     <div class="programmer">
@@ -789,9 +862,69 @@ h2{
   <span>  جميع الحقوق محفوظة عبدالخالق النعيمي © 2025</span>
     </div>
 </footer>
+
+
+
+
+
+
+
+<script>
+  async function compressImage() {
+          // إخفاء الشريط عند الضغط على تحميل
+      document.getElementById('progressContainerBg').style.display = "none";
+      document.getElementById('progressTextBg').style.display = "none";
+    const input1 = document.getElementById("compressInput2a");
+    const input2 = document.getElementById("compressInput2");
+    const fileInput = input1.files.length ? input1 : input2;
+    const file = fileInput.files[0];
+
+    if (!file) return alert("اختر صورة أولاً");
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const maxWidth = 800;
+        const scale = Math.min(maxWidth / img.width, 1);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // جودة مضغوطة
+        canvas.toBlob(blob => {
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = "compressed.jpg";
+          link.click();
+        }, "image/jpeg", 0.6); // جودة 60%
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+
 <script>
   function openCamera() {
     const input = document.getElementById("bgRemoveInput1");
+
+    // إعادة تعيين حتى لا يحتفظ بحدث سابق
+    input.value = "";
+
+    input.onchange = () => {
+      if (input.files.length > 0) {
+        startProgress();
+      }
+    };
+
+    input.click();
+  }
+  function openCamer1() {
+    const input = document.getElementById("compressInput1");
 
     // إعادة تعيين حتى لا يحتفظ بحدث سابق
     input.value = "";
@@ -845,42 +978,55 @@ h2{
     }
   });
 </script>
-<!-- JavaScript -->
 <script>
-  function startProgress() {
-    const container = document.getElementById("progressContainer");
-    const bar = document.getElementById("progressBar");
-    const text = document.getElementById("progressText");
+  const chooseLabel2 = document.getElementById('chooseLabel2');
+  const choiceButtons2 = document.getElementById('choiceButtons2');
+  const compressInput1 = document.getElementById('compressInput1');
+  const compressInput = document.getElementById('compressInput');
 
-    container.style.display = "block";
-    text.style.display = "block";
-    bar.style.width = "0%";
-    text.innerText = "0%";
+  chooseLabel2.addEventListener('click', () => {
+    if (choiceButtons2.style.display === 'flex') {
+      choiceButtons2.style.display = 'none';
+    } else {
+      choiceButtons2.style.display = 'flex';
+    }
+  });
 
-    let progress = 0;
-    const interval = 40; // تحديث كل 40ms
-    const duration = 4000; // 4 ثواني
-    const step = 100 / (duration / interval);
+  document.getElementById('cameraBtn').addEventListener('click', () => {
+    choiceButtons2.style.display = 'none';
+    cameraInput.click();
+  });
 
-    const timer = setInterval(() => {
-      progress += step;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(timer);
-      }
-      bar.style.width = progress + "%";
-      text.innerText = Math.round(progress) + "%";
-    }, interval);
-  }
+  document.getElementById('galleryBtn').addEventListener('click', () => {
+    choiceButtons2.style.display = 'none';
+    compressInput.click();
+  });
 
+  // إذا أردت تلتقط الصور أو تعالج الملفات بعد الاختيار، تضيف هنا مستمعين
+  cameraInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+      console.log('تم اختيار صورة من الكاميرا');
+      // معالجتك هنا
+    }
+  });
 
-  
+  galleryInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+      console.log('تم اختيار صورة من البوم الصور');
+      // معالجتك هنا
+    }
+  });
 </script>
+<!-- JavaScript -->
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0.5"></script>
 
 <script>
    async function removeBgLocal() {
+          // إخفاء الشريط عند الضغط على تحميل
+      document.getElementById('progressContainerBg').style.display = "none";
+      document.getElementById('progressTextBg').style.display = "none";
     const input1 = document.getElementById("bgRemoveInput");
     const input2 = document.getElementById("bgRemoveInput1");
     
@@ -959,32 +1105,7 @@ h2{
 
 
 
-  function compressImage() {
-    const file = document.getElementById("compressInput").files[0];
-    if (!file) return alert("اختر صورة");
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-        canvas.toBlob(blob => {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.download = "compressed.jpg";
-          link.click();
-        }, 'image/jpeg', 0.4);
-      };
-    };
-    reader.readAsDataURL(file);
-        // عند الضغط على تحميل، يمكن إخفاء الشريط إذا رغبت
-  }
+ 
 
 
 
