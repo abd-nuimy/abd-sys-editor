@@ -400,7 +400,6 @@ body.dark-mode select {
 
 }
 
-.card button,
 .card label {
   background: #3498db;
   color: white;
@@ -412,9 +411,12 @@ body.dark-mode select {
 }
 
 .card button {
+  
   font-family: "Tajawal", sans-serif;
   margin-right: 0; /* Reset margin to center the button */
 }
+
+
 
 
 /* تأثيرات على الأزرار عند المرور عليها */
@@ -534,7 +536,7 @@ body.dark-mode select {
   color: white;
   border: none;
   margin-top: -10px;
-  padding: 8px 10px;
+  padding: 5px 10px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
@@ -568,6 +570,87 @@ h2{
 #scrollBtn:hover {
   background:none;
 }
+/* From Uiverse.io by vinodjangid07 */ 
+.Download-button {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-family: inherit;
+  font-weight: bolder;
+  font-size: 14px;
+  padding: 12px 20px;
+  color: white;
+  background: rgb(103, 92, 156);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em rgba(59, 48, 78, 0.527);
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+
+
+.Download-button:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em rgba(88, 71, 116, 0.627);
+}
+
+.Download-button:active {
+  box-shadow: 0 0.3em 1em -0.5em rgba(88, 71, 116, 0.627);
+}
+
+.Download-button::before {
+  content: "";
+  width: 4px;
+  height: 40%;
+  background-color: white;
+  position: absolute;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.Download-button::after {
+  content: "";
+  width: 4px;
+  height: 40%;
+  background-color: white;
+  position: absolute;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  right: 0;
+  transition: all 0.2s;
+}
+
+.Download-button:hover::before,
+.Download-button:hover::after {
+  height: 60%;
+}
+.Download-button span{
+  margin-left: 10px;
+  margin-right: 16px;
+}
+
+
+
+.card .button-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .card .Download-button {
+    padding: 5px 16px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .card .Download-button i {
+    margin-right: 5px;}
   </style>
 </head>
 <body>
@@ -588,20 +671,72 @@ h2{
 <div class="container">
  <!-- مثال على خدمة واحدة -->
 
-  <!-- إزالة الخلفية -->
-  <div class="card">
-    <div class="card-icon"><i class="fa-solid fa-image"></i></div>
-    <div class="card-title">إزالة خلفية الصورة</div>
-    <div class="card-desc">يمكنك بسهولة إزالة خلفية الصورة من خلال اختيار الصورة والضغط على ازالة وسيتم تحميل الصورة مباشرة اذا كانت الصورة مدعومـــة .</div>
+<!-- إزالة الخلفية -->
+<div class="card">
+  <div class="card-icon"><i class="fa-solid fa-image"></i></div>
+  <div class="card-title">إزالة خلفية الصورة</div>
+  <div class="card-desc">
+    يمكنك  إزالة خلفية الصورة من خلال اختيار الصورة والضغط على تحمي وسيتم تحميل الصورة مباشرة اذا كانت الصورة مدعومة.
+  </div>
+
   <div class="file-upload-container">
-  <input type="file" accept="image/*" id="bgRemoveInput" />
-  <div class="button-row">
-    <label for="bgRemoveInput">اختر صورة</label>
-    <button onclick="removeBackground()">إزالة وتحميل</button>
+    <!-- input الصورة -->
+    <input type="file" accept="image/*" id="bgRemoveInput" onchange="startProgress()" />
+
+    <div class="button-row">
+      <label  for="bgRemoveInput">اختر صورة</label>
+
+      <!-- زر التحميل -->
+      <button class="Download-button" onclick="removeBackground()">
+        <span>تحميل</span>
+        <i class="fa-solid fa-download"></i>
+      </button>
+    </div>
+
+    <!-- شريط التقدم -->
+    <div class="progressContainer" id="progressContainer" style="height: 5px; border-radius: 200px; background: #ccc; margin-top: 10px; width: 100%; display: none;">
+      <div id="progressBar" style="height: 100%; width: 0%; border-radius: 200px; background: #3498db;"></div>
+    </div>
+
+    <!-- ✅ العداد النصي -->
+    <div id="progressText" style="text-align: center;  margin-top: -2px; font-size: 14px; display: none;">0%</div>
   </div>
 </div>
 
-  </div>
+<!-- JavaScript -->
+<script>
+  function startProgress() {
+    const container = document.getElementById("progressContainer");
+    const bar = document.getElementById("progressBar");
+    const text = document.getElementById("progressText");
+
+    container.style.display = "block";
+    text.style.display = "block";
+    bar.style.width = "0%";
+    text.innerText = "0%";
+
+    let progress = 0;
+    const interval = 40; // تحديث كل 40ms
+    const duration = 4000; // 4 ثواني
+    const step = 100 / (duration / interval);
+
+    const timer = setInterval(() => {
+      progress += step;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(timer);
+      }
+      bar.style.width = progress + "%";
+      text.innerText = Math.round(progress) + "%";
+    }, interval);
+  }
+
+
+  
+</script>
+
+
+
 
   <!-- ضغط الصور -->
   <div class="card">
@@ -609,10 +744,12 @@ h2{
     <div class="card-title">ضغط الصور</div>
     <div class="card-desc">يمكنك بسهولة اختيار صورة لتقليص او تصغير حجمها دون فقدان الجودة الاصلية وستيم تحميل الصورة مباشرة على جهازك .</div>
     <div class="file-upload-container">
-      <input type="file" accept="image/*" id="compressInput" />
+      <input type="file" accept="image/*"  id="compressInput" />
+      <input type="file" id="compressInput1" capture="environment" />
         <div class="button-row">
 
       <label for="compressInput">اختر صورة</label>
+      <label for="compressInput1">اختر كاميرا</label>
       <button onclick="compressImage()">ضغط وتحميل</button>
     </div>
     </div>
@@ -693,8 +830,9 @@ h2{
       headers: { "X-Api-Key": "h5Ecn8VCfL1T7Wf6NuuH5gfv" },
       body: formData
     });
-
-    if (!response.ok) return alert("فشل في إزالة الخلفية. تأكد من نوع الصورة والمفتاح.");
+    document.getElementById("progressContainer").style.display = "none";
+    document.getElementById("progressText").style.display = "none";
+    if (!response.ok) return alert("فشل في إزالة الخلفية. تأكد من نوع الصورة .");
 
     const blob = await response.blob();
     const url = URL.createObjectURL(blob);
@@ -702,6 +840,7 @@ h2{
     link.href = url;
     link.download = "no-background.png";
     link.click();
+
   }
 
   function compressImage() {
@@ -728,6 +867,7 @@ h2{
       };
     };
     reader.readAsDataURL(file);
+        // عند الضغط على تحميل، يمكن إخفاء الشريط إذا رغبت
   }
 
 
