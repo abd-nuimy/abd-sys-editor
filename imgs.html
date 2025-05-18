@@ -30,7 +30,7 @@
 header {
   background: none;
   box-shadow: 4px 2px 20px #2c3e5020;
-  color: #2980b9;
+  color: rgb(98, 0, 255);
   padding: 15px;
   font-weight: bolder;
   direction: rtl; /* التأكد من المحاذاة لليمين (إذا كنت تستخدم نصًا عربيًا) */
@@ -203,7 +203,7 @@ header span{
       position: fixed;
       top: 20px;
       left: 20px;
-      background: #2980b9;
+      background: rgb(98, 0, 255);
       color: white;
       border: none;
       border-radius: 50%;
@@ -222,7 +222,7 @@ header span{
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #2980b9;
+      background: rgb(52, 4, 128);
       color: white;
       text-align: center;
       padding: 10px 0;
@@ -288,13 +288,13 @@ body.dark-mode {
 .dark-mode .card:hover,
 .dark-mode .card1:hover {
   background-color: #333;
-  border-color: #2980b9;
+  border-color: rgb(98, 0, 255);
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
 }
 
 .dark-mode .card-icon,
 .dark-mode .card1-icon {
-  background-color: #3498db;
+  background-color: rgb(98, 0, 255);
 }
 
 .dark-mode .card-desc,
@@ -303,7 +303,7 @@ body.dark-mode {
 }
 
 .dark-mode .footer .social-icons a {
-  color: #66b2ff;
+  color: rgb(98, 0, 255);
 }
 
 .dark-mode .footer .social-icons a:hover {
@@ -337,60 +337,7 @@ body.dark-mode {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* العناوين داخل الأدوات */
-.tool h3 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #2980b9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.tool h3 i {
-  margin-left: 10px;
-  font-size: 1.3em;
-}
-
-/* إدخال النصوص والمربعات المنسدلة */
-.card input[type="file"],
-.card textarea,
-.card select {
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  font-size: 1em;
-  transition: border 0.3s ease;
-}
-.card select {
-  width: 100%;
-  height: 40px;
-  font-size: 12px;
-  font-family: "Tajawal", sans-serif;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  transition: border 0.3s ease;
-}
-body.dark-mode select {
-  height: 40px;
-  text-align: center;
-  background: #1a1a1a;
-  color: white;
-  font-size: 12px;
-  font-family: "Tajawal", sans-serif;
-}
-
-.card input[type="file"]:hover,
-.card textarea:hover,
-.card select:hover {
-  border-color: #3498db;
-}
 
 /* تحسين الأزرار */
 .file-upload-container {
@@ -416,7 +363,7 @@ body.dark-mode select {
 /* تأثيرات على الأزرار عند المرور عليها */
 .card button:hover,
 .card label:hover {
-  background-color: #2980b9;
+  background-color: rgb(98, 0, 255);
   transform: translateY(-3px);
 }
 
@@ -455,7 +402,7 @@ body.dark-mode select {
 
     .card {
       background: none;
-      border: 1.5px solid #cccccc;
+      border: 1.5px solid rgb(98, 0, 255);
       border-radius: 12px;
       padding: 10px;
       width: 300px;
@@ -470,7 +417,7 @@ body.dark-mode select {
 
     .card:hover {
       background: white;
-          border: 1.5px solid #3498db;
+          border: 1.5px solid rgb(98, 0, 255);
 
       transform: translateY(-5px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -483,7 +430,7 @@ body.dark-mode select {
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: #2980b9;
+      background: rgb(98, 0, 255);
       color: white;
       font-size: 24px;
       border-radius: 8px;
@@ -620,7 +567,7 @@ h2{
 
   .card .Download-button {
     padding: 5px 16px;
-    background-color: #1976d2;
+    background-color: rgb(98, 0, 255);
     color: white;
     border: none;
     border-radius: 6px;
@@ -692,6 +639,9 @@ h2{
   cursor: text;
   transition: all .5s ease-in-out;
   font-family: inherit;
+}
+body.dark-mode input{
+  background: none;
 }
 
 .input::placeholder {
