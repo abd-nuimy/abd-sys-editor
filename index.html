@@ -375,15 +375,34 @@ body.dark-mode {
     text-align: right;
     font-family: 'Courier New', Courier, monospace;
   }
+header a{
+  text-decoration: none;
+  color: rgb(98, 0, 255);
+}
+header .header-title{
+  margin-top: 6px;
+}
+header .more{
+  font-size: 16px;
+  color: rgb(7, 1, 19);
+  font-weight: lighter;
+  margin-top: -3px;
+  display: block;
+  margin-right: -58px;
+}
+body.dark-mode header .more{
+  color: white;
+}
   </style>
 </head>
 <body>
 
 <header>
   <img src="images/logo-home.png" alt="">
-
-  <span>محرر الملفات الذكي</span>
-
+  <div class="header-title">
+  <a href="#"> <span>محرر الملفات الذكي</span> </a>
+  <p class="more"> ملفات PDF والصور</p>
+  </div>
   <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
     <i class="fa-solid fa-moon"></i>
   </button>
