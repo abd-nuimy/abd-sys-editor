@@ -26,7 +26,7 @@
 header {
   background: none;
   box-shadow: 4px 2px 20px #2c3e5020;
-  color: #2980b9;
+  color: rgb(98, 0, 255);
   padding: 15px;
   font-weight: bolder;
   direction: rtl; /* التأكد من المحاذاة لليمين (إذا كنت تستخدم نصًا عربيًا) */
@@ -85,7 +85,7 @@ header span{
 
     .card:hover {
       background: white;
-          border: 1.5px solid #3498db;
+          border: 1.5px solid rgb(98, 0, 255);
 
       transform: translateY(-5px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -98,7 +98,7 @@ header span{
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: #2980b9;
+      background: rgb(98, 0, 255);
       color: white;
       font-size: 24px;
       border-radius: 8px;
@@ -130,7 +130,7 @@ header span{
 
     .card1:hover {
       background: white;
-          border: 1.5px solid #3498db;
+          border: 1.5px solid rgb(98, 0, 255);
 
       transform: translateY(-5px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -143,7 +143,7 @@ header span{
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: #2980b9;
+  background: rgb(98, 0, 255);
   color: white;
   font-size: 24px;
   border-radius: 8px;
@@ -187,7 +187,7 @@ header span{
 }
 
 .footer .social-icons a {
-  color: #2980b9;
+  color: rgb(98, 0, 255);
   margin: 0 8px;
   text-decoration: none;
 }
@@ -199,7 +199,7 @@ header span{
       position: fixed;
       top: 20px;
       left: 20px;
-      background: #2980b9;
+      background: rgb(98, 0, 255);
       color: white;
       border: none;
       border-radius: 50%;
@@ -218,7 +218,7 @@ header span{
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #2980b9;
+      background: rgb(52, 4, 128);
       color: white;
       text-align: center;
       padding: 10px 0;
@@ -254,9 +254,7 @@ footer img {
       font-weight: bolder;
     }
     /*دارك مود*/
-  body.dark-mode header a {
-    color: rgb(255, 255, 255);
-}
+
     body.light-mode {
   background: #f5f7fa;
   color: #333;
@@ -286,7 +284,7 @@ body.dark-mode {
 
 .dark-mode .card-icon,
 .dark-mode .card1-icon {
-  background-color: #3498db;
+  background-color: rgb(98, 0, 255);
 }
 
 .dark-mode .card-desc,
@@ -336,6 +334,47 @@ body.dark-mode {
   text-align: center;     /* يوسّط النص نفسه */
 }
 
+
+/*العدد الزورا*/
+ .totle {
+      background: none;
+      border: 1.5px solid #cccccc;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      height: 100px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+  }
+
+  .numzuar, .numkdmat {
+    background: rgba(255 255 255 / 0.15);
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease;
+    cursor: default;
+  }
+
+  .numzuar:hover, .numkdmat:hover {
+    background: rgba(255 255 255 / 0.3);
+  }
+
+  #visitorCount {
+    font-size: 22px;
+    color: #ffd700; /* ذهبي */
+    font-weight: 900;
+    min-width: 50px;
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace;
+  }
   </style>
 </head>
 <body>
@@ -365,7 +404,72 @@ body.dark-mode {
     <div class="card1-title">خدمات PDF</div>
     <div class="card1-desc"> بسهولة يمكنك تحويل الصور الى ملف PDF وغيرها من الخدمات </div>
   </div>
+
+
+
+
+
+<div class="totle">
+  <div class="numzuar">
+    <span>عدد الزوار: </span><span id="visitorCount">0</span>
   </div>
+  <div class="numkdmat">
+    <span>عدد الخدمات: +7</span>
+  </div>
+</div>
+
+  </div>
+<!-- Firebase + Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+  // تكوين Firebase (استبدل هنا بالتكوين الخاص بك)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAqAGHqN4eba9HcZzkoAzEXrcky38uh3C4",
+    authDomain: "editor-abd.firebaseapp.com",
+    projectId: "editor-abd",
+    storageBucket: "editor-abd.firebasestorage.app",
+    messagingSenderId: "918571178321",
+    appId: "1:918571178321:web:73c3acde944f0519731b70",
+    measurementId: "G-B7N4836KY4"
+  };
+
+  // تهيئة التطبيق وقاعدة البيانات
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+  // دالة لتحريك العد
+  function animateCount(id, start, end, duration) {
+    let range = end - start;
+    if(range === 0) return; // لا تحريك إذا العدد ثابت
+    let current = start;
+    let increment = end > start ? 1 : -1;
+    let stepTime = Math.abs(Math.floor(duration / range));
+    let obj = document.getElementById(id);
+    let timer = setInterval(() => {
+      current += increment;
+      obj.textContent = current.toLocaleString();
+      if (current == end) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+  }
+
+  // الاستماع لتغييرات عدد الزوار في قاعدة البيانات (مثلاً عند المسار "visitorCount")
+  const visitorRef = ref(database, 'visitorCount');
+
+  onValue(visitorRef, (snapshot) => {
+    const newCount = snapshot.val() || 0;
+    const displayed = Number(document.getElementById('visitorCount').textContent.replace(/,/g, '')) || 0;
+    animateCount("visitorCount", displayed, newCount, 1500);
+  });
+  </script>
+
+
+
+
+
   <div class="footer">
     <div class="programmer">
       <span>
