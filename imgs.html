@@ -126,7 +126,7 @@ header span{
       border-radius: 12px;
       padding: 20px;
       width: 300px;
-      height: 100px;
+      height: 1000px;
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       transition: 0.3s;
@@ -262,9 +262,7 @@ footer img {
       font-weight: bolder;
     }
     /*دارك مود*/
-  body.dark-mode header a {
-    color: rgb(255, 255, 255);
-}
+
     body.light-mode {
   background: #f5f7fa;
   color: #333;
@@ -322,20 +320,9 @@ body.dark-mode {
 
 
 
-/* تصميم الأدوات داخل الحاوية */
-.tool {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.tool:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
+
+
 
 
 
@@ -668,16 +655,34 @@ body.dark-mode input{
   transform: rotate(360deg);
   transition: .2s ease-in-out;
 }
-
+header a{
+  text-decoration: none;
+  color: rgb(98, 0, 255);
+}
+header .header-title{
+  margin-top: 6px;
+}
+header .more{
+  font-size: 16px;
+  color: rgb(7, 1, 19);
+  font-weight: lighter;
+  margin-top: -3px;
+  display: block;
+  margin-right: -58px;
+}
+body.dark-mode header .more{
+  color: white;
+}
   </style>
 </head>
 <body>
 
 <header>
   <img src="images/logo-home.png" alt="">
-
-  <span>محرر الملفات الذكي</span>
-
+  <div class="header-title">
+  <a href="index.html"> <span>محرر الملفات الذكي</span> </a>
+  <p class="more"> ملفات PDF والصور</p>
+  </div>
   <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
     <i class="fa-solid fa-moon"></i>
   </button>
