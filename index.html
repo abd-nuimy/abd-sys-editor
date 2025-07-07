@@ -24,6 +24,7 @@
     }
 
 header {
+  align-items: center;
   background: none;
   box-shadow: 4px 2px 20px #2c3e5020;
   color: rgb(98, 0, 255);
@@ -35,16 +36,18 @@ header {
 }
 
 header img {
-  height: 65px;
-  margin-top: 2px;
+  align-items: center;
+  height: 45px;
+  margin-top: 10px;
   margin-left: 70px;
-  width: 65px;
+  width: 45px;
   margin-right: 60px; /* إضافة مسافة بين الصورة والحافة اليمنى */
 }
 header span{
+  align-items: center;
   margin-right: -60px;
-  margin-top: 15px;
-  font-size:22px;
+  top: 30px;
+  font-size:20px;
 }
 
 
@@ -197,19 +200,16 @@ header span{
 
 }
     .theme-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: rgb(98, 0, 255);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 18px;
+      top: 30px;
+      background: none;
+      color: rgb(98, 0, 255);
+      border: solid 1px rgb(98, 0, 255);
+      border-radius: 30%;
+      width: 35px;
+      height: 35px;
+      font-size: 15px;
       cursor: pointer;
       transition: background 0.3s;
-      z-index: 999;
     }
 
     .theme-toggle:hover {
@@ -452,7 +452,7 @@ header a{
   color: rgb(98, 0, 255);
 }
 header .header-title{
-  margin-top: 6px;
+  margin-top: 20px;
 }
 header .more{
   font-size: 16px;
@@ -469,6 +469,30 @@ body.dark-mode header a{
   text-decoration: none;
   color: rgb(98, 0, 255);
 }
+.icons{
+  display: flex;
+  gap: 8px;
+  margin-left: -60px;
+  align-items: center;
+  margin-right: 25px;
+}
+    .msgs {
+      top: 30px;
+      left: 20px;
+      background: none;
+      color: rgb(98, 0, 255);
+      border: solid 1px rgb(98, 0, 255);
+      border-radius: 30%;
+      width: 35px;
+      height: 35px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .msgs:hover {
+      background: #1c5982;
+    }
   </style>
 </head>
 <body>
@@ -479,9 +503,15 @@ body.dark-mode header a{
   <a href="#"> <span>محرر الملفات الذكي</span> </a>
   <p class="more"> ملفات PDF والصور</p>
   </div>
+  <div class="icons">
   <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
     <i class="fa-solid fa-moon"></i>
   </button>
+<button class="msgs" id="msgs" onclick="window.location.href='msgs.html'" title="الإشعارات">
+  <i class="fa-solid fa-bell"></i>
+</button>
+
+  </div>
 </header>
 <button onclick="scrollToTop()" id="scrollBtn" title="العودة للأعلى"><i class="fa-solid fa-chevron-up"></i></button>
 
@@ -513,7 +543,7 @@ body.dark-mode header a{
   </div>
   <div class="numzuar">
     <i class="fa-solid fa-hard-drive"></i>
-    <span class="span1">عدد الخدمات: </span><span class="visitorCount">+7</span>
+    <span class="span1">عدد الخدمات: </span><span class="visitorCount">+8</span>
   </div></div>
 
 <!-- Firebase + Script -->
@@ -581,7 +611,6 @@ body.dark-mode header a{
         مبرمج الموقع عبدالخالق النعيمي
       </span>
     
-
     </div>
     
     <div class="social-icons">
