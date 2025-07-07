@@ -30,6 +30,7 @@
     }
 
 header {
+  align-items: center;
   background: none;
   box-shadow: 4px 2px 20px #2c3e5020;
   color: rgb(98, 0, 255);
@@ -41,6 +42,7 @@ header {
 }
 
 header img {
+  align-items: center;
   height: 45px;
   margin-top: 10px;
   margin-left: 70px;
@@ -48,9 +50,10 @@ header img {
   margin-right: 60px; /* إضافة مسافة بين الصورة والحافة اليمنى */
 }
 header span{
+  align-items: center;
   margin-right: -60px;
-  margin-top: 15px;
-  font-size:22px;
+  top: 30px;
+  font-size:20px;
 }
 
 
@@ -111,19 +114,16 @@ header span{
 
 }
     .theme-toggle {
-      position: fixed;
       top: 30px;
-      left: 20px;
-      background: rgb(98, 0, 255);
-      color: white;
-      border: none;
-      border-radius: 50%;
+      background: none;
+      color: rgb(98, 0, 255);
+      border: solid 1px rgb(98, 0, 255);
+      border-radius: 30%;
       width: 35px;
       height: 35px;
       font-size: 15px;
       cursor: pointer;
       transition: background 0.3s;
-      z-index: 999;
     }
 
     .theme-toggle:hover {
@@ -655,7 +655,7 @@ body.dark-mode header a{
   color: rgb(98, 0, 255);
 }
 header .header-title{
-  margin-top: 6px;
+  margin-top: 20px;
 }
 header .more{
   font-size: 16px;
@@ -670,25 +670,24 @@ body.dark-mode header .more{
 }
 
 .icons{
-  flex-direction: column;
-
+  display: flex;
+  gap: 8px;
+  margin-left: -60px;
+  align-items: center;
+  margin-right: 25px;
 }
     .msgs {
-      
-      position: fixed;
       top: 30px;
       left: 20px;
-      background: rgb(98, 0, 255);
-      color: white;
-      border: none;
-      border-radius: 50%;
+      background: none;
+      color: rgb(98, 0, 255);
+      border: solid 1px rgb(98, 0, 255);
+      border-radius: 30%;
       width: 35px;
       height: 35px;
       font-size: 15px;
       cursor: pointer;
       transition: background 0.3s;
-      z-index: 999;
-      margin-left: 50px;
     }
 
     .msgs:hover {
