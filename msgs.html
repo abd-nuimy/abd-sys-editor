@@ -1,11 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الاشعارات</title>
+  <title>الإشعارات</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: #1a1a1a;
+      color: #f1f1f1;
+    }
+
+    header {
+      background: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      direction: rtl;
+    }
+
+    .header-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: rgb(98, 0, 255);
+    }
+
+    .icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-toggle, .back-btn {
+      background: none;
+      color: rgb(98, 0, 255);
+      border: 1px solid rgb(98, 0, 255);
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover, .back-btn:hover {
+      background: #1c5982;
+      color: white;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 30px;
+      color: rgb(98, 0, 255);
+    }
+
+    .notifications {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .notification-card {
+      border: 1.5px solid #ccc;
+      border-radius: 12px;
+      padding: 15px 20px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+    }
+
+    .notification-card:hover {
+      border-color: rgb(98, 0, 255);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .notification-title {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 8px;
+    }
+
+    .notification-time {
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    /* الوضع الليلي */
+    body.dark-mode .notification-card {
+      background: #2b2b2b;
+      border-color: #444;
+    }
+
+    body.dark-mode .notification-card:hover {
+      background: #333;
+      border-color: rgb(98, 0, 255);
+    }
+
+    body.dark-mode .notification-time {
+      color: #bbb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 50px;
+      background: rgb(52, 4, 128);
+      color: white;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: #ffcc00;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  تم تحديث الموقع
+
+<header>
+  <div class="header-title">الإشعارات</div>
+  <div class="icons">
+    <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <button class="back-btn" onclick="location.href='index.html'" title="رجوع">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+</header>
+
+<h2>آخر الإشعارات</h2>
+
+<div class="notifications">
+  <div class="notification-card">
+    <div class="notification-title">تم إضافة ميزة جديدة لدمج ملفات  PDF</div>
+    <div class="notification-time">منذ 5 دقائق</div>
+  </div>
+
+  <div class="notification-card">
+    <div class="notification-title">تم تحسين الأداء في صفحة ملفات PDF</div>
+    <div class="notification-time">اليوم - 9:00 صباحاً</div>
+  </div>
+
+  <div class="notification-card">
+    <div class="notification-title">تم إطلاق صفحة الإشعارات رسمياً</div>
+    <div class="notification-time">أمس - 6:00 مساءً</div>
+  </div>
+</div>
+
+<footer>
+  <div>© 2025 جميع الحقوق محفوظة - عبدالخالق النعيمي</div>
+  <div>
+    <a href="index.html">الصفحة الرئيسية</a> |
+    <a href="imgs.html">خدمات الصور</a> |
+    <a href="pdf.html">خدمات PDF</a>
+  </div>
+</footer>
+
+<script>
+  const toggleButton = document.getElementById("themeToggle");
+  const body = document.body;
+
+  const currentTheme = localStorage.getItem("theme");
+  if (currentTheme === "dark") {
+    body.classList.add("dark-mode");
+    toggleButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
+  }
+
+  toggleButton.addEventListener("click", () => {
+    if (body.classList.contains("dark-mode")) {
+      body.classList.remove("dark-mode");
+      toggleButton.innerHTML = '<i class="fa-solid fa-moon"></i>';
+      localStorage.setItem("theme", "light");
+    } else {
+      body.classList.add("dark-mode");
+      toggleButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
+      localStorage.setItem("theme", "dark");
+    }
+  });
+</script>
+
 </body>
 </html>
