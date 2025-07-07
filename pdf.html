@@ -41,10 +41,10 @@ header {
 }
 
 header img {
-  height: 65px;
-  margin-top: 2px;
+  height: 45px;
+  margin-top: 10px;
   margin-left: 70px;
-  width: 65px;
+  width: 45px;
   margin-right: 60px; /* إضافة مسافة بين الصورة والحافة اليمنى */
 }
 header span{
@@ -112,15 +112,15 @@ header span{
 }
     .theme-toggle {
       position: fixed;
-      top: 20px;
+      top: 30px;
       left: 20px;
       background: rgb(98, 0, 255);
       color: white;
       border: none;
       border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 18px;
+      width: 35px;
+      height: 35px;
+      font-size: 15px;
       cursor: pointer;
       transition: background 0.3s;
       z-index: 999;
@@ -650,6 +650,10 @@ header a{
   text-decoration: none;
   color: rgb(98, 0, 255);
 }
+body.dark-mode header a{
+  text-decoration: none;
+  color: rgb(98, 0, 255);
+}
 header .header-title{
   margin-top: 6px;
 }
@@ -664,10 +668,32 @@ header .more{
 body.dark-mode header .more{
   color: white;
 }
-    body.dark-mode header a{
-  text-decoration: none;
-  color: rgb(98, 0, 255);
+
+.icons{
+  flex-direction: column;
+
 }
+    .msgs {
+      
+      position: fixed;
+      top: 30px;
+      left: 20px;
+      background: rgb(98, 0, 255);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 999;
+      margin-left: 50px;
+    }
+
+    .msgs:hover {
+      background: #1c5982;
+    }
   </style>
 </head>
 <body>
@@ -678,9 +704,15 @@ body.dark-mode header .more{
   <a href="index.html"> <span>محرر الملفات الذكي</span> </a>
   <p class="more"> ملفات PDF والصور</p>
   </div>
+  <div class="icons">
   <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
     <i class="fa-solid fa-moon"></i>
   </button>
+<button class="msgs" id="msgs" onclick="window.location.href='msgs.html'" title="الإشعارات">
+  <i class="fa-solid fa-bell"></i>
+</button>
+
+  </div>
 </header>
 <button onclick="scrollToTop()" id="scrollBtn" title="العودة للأعلى"><i class="fa-solid fa-chevron-up"></i></button>
 
@@ -1226,6 +1258,76 @@ function startImageConvertProgress() {
 }
 
 
+</script>
+<div class="card">
+  <div class="card-icon"><i class="fa-solid fa-code-merge"></i></div>
+  <div class="card-title">دمج ملفات PDF</div>
+  <div class="card-desc">يمكنك بسهولة دمج عدة ملفات PDF في ملف واحد. اختر الملفات واضغط على دمج وتحميل للحصول على ملف PDF موحد.</div>
+  
+  <div class="file-upload-container">
+    <input type="file" id="mergePdfFiles" accept="application/pdf" multiple onchange="startMergeProgress()" />
+    
+    <div class="button-row">
+      <label class="Download-button" for="mergePdfFiles">اختر ملفات</label>
+
+      <!-- زر الدمج -->
+      <button class="Download-button" id="mergeBtn" onclick="mergePDFs()" style="display: none;">
+        <span>تحميل</span>
+        <i class="fa-solid fa-download"></i>
+      </button>
+    </div>
+
+    <!-- شريط التقدم -->
+    <div class="progressContainer" id="mergeProgressContainer" style="height: 5px; border-radius: 200px; background: #ccc; margin-top: 10px; width: 100%; display: none;">
+      <div id="mergeProgressBar" style="height: 100%; width: 0%; border-radius: 200px; background: #00cc22;"></div>
+    </div>
+    <div id="mergeProgressText" style="text-align: center; margin-top: 2px; font-size: 14px; display: none;">0%</div>
+  </div>
+</div>
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+<script>
+  async function startMergeProgress() {
+    const input = document.getElementById('mergePdfFiles');
+    const progressBar = document.getElementById('mergeProgressBar');
+    const progressContainer = document.getElementById('mergeProgressContainer');
+    const progressText = document.getElementById('mergeProgressText');
+    const mergeBtn = document.getElementById('mergeBtn');
+
+    if (!input.files.length) return;
+
+    progressContainer.style.display = 'block';
+    progressText.style.display = 'block';
+    mergeBtn.style.display = 'none'; // نخفي الزر مؤقتاً
+
+    const mergedPdf = await PDFLib.PDFDocument.create();
+
+    for (let i = 0; i < input.files.length; i++) {
+      const file = input.files[i];
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+      const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+      copiedPages.forEach(page => mergedPdf.addPage(page));
+
+      const percent = Math.round(((i + 1) / input.files.length) * 100);
+      progressBar.style.width = percent + '%';
+      progressText.innerText = percent + '%';
+    }
+
+    const mergedPdfBytes = await mergedPdf.save();
+    const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+
+    // حفظ الرابط للتحميل لاحقاً
+    mergeBtn.onclick = () => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'دمج.pdf';
+      a.click();
+    };
+
+    progressText.innerText = 'اكتمل 100%';
+    mergeBtn.style.display = 'inline-block'; // نظهر الزر بعد الانتهاء
+  }
 </script>
 
 </div>
